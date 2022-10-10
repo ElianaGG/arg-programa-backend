@@ -10,31 +10,33 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/personas")
 public class PersonaController {
     @Autowired IPersonaService ipersonaService;
-    
-    @GetMapping("personas/traer")
+
+    @GetMapping()
     public List<Persona> getPersona() {
         return ipersonaService.getPersona(); 
     }
     
-    @PostMapping("/personas/crear")
+    @PostMapping()
     public String createPersona(@RequestBody Persona persona){
         ipersonaService.savePersona(persona);
         return "Persona creada con exito";
     }
     
-    @DeleteMapping("/personas/borrar/(id)")
+    @DeleteMapping("/{id}")
     public String deletePersona(@PathVariable Long id){
         ipersonaService.deletePersona (id);
         return "Persona eliminada con exito";
     }
    
-    @PutMapping("/pesona/editar/(id)")
+    @PutMapping("/{id}")
     public Persona editPersona(@PathVariable Long id,
                                 @RequestParam("nombre") String nuevoNombre,
                                 @RequestParam("apellido") String nuevoApellido,
