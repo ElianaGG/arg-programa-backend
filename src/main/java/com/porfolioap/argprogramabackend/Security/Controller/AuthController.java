@@ -92,5 +92,5 @@ public class AuthController {
 
         return new ResponseEntity<>(jwtDto, HttpStatus.OK);
     }
-
+    
 }

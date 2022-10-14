@@ -44,7 +44,9 @@ public class Usuario {
         this.email = email;
         this.password = password;
     }
-
+    
+    public Usuario(){
+    }
     
     //Getter & Setter
     public int getId() {
