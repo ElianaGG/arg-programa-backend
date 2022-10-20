@@ -4,7 +4,6 @@ import com.porfolioap.argprogramabackend.Entity.Persona;
 import com.porfolioap.argprogramabackend.Interface.IPersonaService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +25,12 @@ public class PersonaController {
     public List<Persona> getPersona() {
         return ipersonaService.getPersona(); 
     } 
-    
+   
+    @GetMapping("/perfil")
+    public Persona findPersona() {
+        return ipersonaService.findPersona((long)1);
+    }
+
     @PostMapping()
     public String createPersona(@RequestBody Persona persona){
         ipersonaService.savePersona(persona);
@@ -51,10 +55,5 @@ public class PersonaController {
             
        ipersonaService.savePersona(persona);
        return persona;
-    }
-
-    @GetMapping("/perfil")
-    public Persona findPersona() {
-        return ipersonaService.findPersona((long)1);
     }
 }
