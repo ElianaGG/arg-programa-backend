@@ -27,21 +27,18 @@ public class PersonaController {
         return ipersonaService.getPersona(); 
     } 
     
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping()
     public String createPersona(@RequestBody Persona persona){
         ipersonaService.savePersona(persona);
         return "Persona creada con exito";
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public String deletePersona(@PathVariable Long id){
         ipersonaService.deletePersona (id);
         return "Persona eliminada con exito";
     }
    
-    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public Persona editPersona(@PathVariable Long id,
                                 @RequestParam("nombre") String nuevoNombre,
