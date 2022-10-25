@@ -46,9 +46,4 @@ public class Experiencia {
     public void setDescriptionExp(String descriptionExp) {
         this.descriptionExp = descriptionExp;
     }
-
-
-    
-
-
 }
