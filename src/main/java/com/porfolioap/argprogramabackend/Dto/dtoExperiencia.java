@@ -2,6 +2,10 @@ package com.porfolioap.argprogramabackend.Dto;
 
 import javax.validation.constraints.NotBlank;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter @Setter
 public class dtoExperiencia {
     @NotBlank
     private String nombreExp;
@@ -18,25 +22,4 @@ public class dtoExperiencia {
         this.nombreExp = nombreExp;
         this.descriptionExp = descriptionExp;
     }
-
-    //Getters & Setters
-    public String getNombreExp() {
-        return nombreExp;
-    }
-
-    public void setNombreExp(String nombreExp) {
-        this.nombreExp = nombreExp;
-    }
-
-    public String getDescriptionExp() {
-        return descriptionExp;
-    }
-
-    public void setDescriptionExp(String descriptionExp) {
-        this.descriptionExp = descriptionExp;
-    }
-
-   
-
-    
 }

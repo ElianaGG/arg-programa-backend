@@ -10,19 +10,20 @@ import lombok.Setter;
 
 @Getter @Setter
 @Entity
-public class Experiencia {
+public class Educacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String nombreExp;
-    private String descriptionExp;
+    private String nombreEdu;
+    private String descriptionEdu;
 
     //Constructores
-    public Experiencia() {
+    public Educacion() {
     } 
 
-    public Experiencia(String nombreExp, String descriptionExp) {
-        this.nombreExp = nombreExp;
-        this.descriptionExp = descriptionExp;
+    public Educacion(String nombreEdu, String descriptionEdu) {
+        this.nombreEdu = nombreEdu;
+        this.descriptionEdu = descriptionEdu;
     }
+
 }
