@@ -1,59 +1,71 @@
 package com.porfolioap.argprogramabackend.Controller;
 
-import com.porfolioap.argprogramabackend.Entity.Persona;
-import com.porfolioap.argprogramabackend.Interface.IPersonaService;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.porfolioap.argprogramabackend.Dto.dtoPersona;
+import com.porfolioap.argprogramabackend.Entity.Persona;
+import com.porfolioap.argprogramabackend.Security.Controller.Mensaje;
+import com.porfolioap.argprogramabackend.Service.ImpPersonaService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200/")
 @RequestMapping("/personas")
 public class PersonaController {
-    @Autowired IPersonaService ipersonaService;
+    @Autowired
+    ImpPersonaService impPersonaService;
 
-    @GetMapping()
-    public List<Persona> getPersona() {
-        return ipersonaService.getPersona(); 
-    } 
-   
-    @GetMapping("/perfil")
-    public Persona findPersona() {
-        return ipersonaService.findPersona((long)1);
+    @GetMapping("/lista")
+    public ResponseEntity<List<Persona>> list() {
+        List<Persona> list = impPersonaService.list();
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-    @PostMapping()
-    public String createPersona(@RequestBody Persona persona){
-        ipersonaService.savePersona(persona);
-        return "Persona creada con exito";
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<?> getById(@PathVariable("id") int id) {
+        if (!impPersonaService.existsById(id)) {
+            return new ResponseEntity<>(new Mensaje("No existe el ID"), HttpStatus.BAD_REQUEST);
+        }
+        Persona persona = impPersonaService.getOne(id).get();
+        return new ResponseEntity<>(persona, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
-    public String deletePersona(@PathVariable Long id){
-        ipersonaService.deletePersona (id);
-        return "Persona eliminada con exito";
-    }
-   
-    @PutMapping("/{id}")
-    public Persona editPersona(@PathVariable Long id,
-                                @RequestParam("nombre") String nuevoNombre,
-                                @RequestParam("apellido") String nuevoApellido,
-                                @RequestParam("img") String nuevoImg){
-        Persona persona = ipersonaService.findPersona(id);
-            persona.setNombre(nuevoNombre);
-            persona.setApellido(nuevoApellido);
-            persona.setImg(nuevoImg);
-            
-       ipersonaService.savePersona(persona);
-       return persona;
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody dtoPersona dtopersona) {
+        if (!impPersonaService.existsById(id)) {
+            return new ResponseEntity<>(new Mensaje("El ID no existe"), HttpStatus.NOT_FOUND);
+        }
+
+        if (impPersonaService.existsByNombre(dtopersona.getNombre()) &&
+                impPersonaService.getByNombre(dtopersona.getNombre()).get().getId() != id) {
+            return new ResponseEntity<>(new Mensaje("El nombre ya existe"), HttpStatus.BAD_REQUEST);
+        }
+
+        if (StringUtils.isBlank(dtopersona.getNombre())) {
+            return new ResponseEntity<>(new Mensaje("El campo es obligatorio"), HttpStatus.BAD_REQUEST);
+        }
+
+        Persona persona = impPersonaService.getOne(id).get();
+        persona.setNombre(dtopersona.getNombre());
+        persona.setApellido(dtopersona.getApellido());
+        persona.setDescription(dtopersona.getDescription());
+        persona.setImg(dtopersona.getImg());
+
+        impPersonaService.save(persona);
+        return new ResponseEntity<>(new Mensaje("Persona actualizada"), HttpStatus.OK);
     }
 }
