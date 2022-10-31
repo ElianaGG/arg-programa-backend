@@ -27,7 +27,7 @@ import com.porfolioap.argprogramabackend.Service.SExperiencia;
 
 @RestController
 @RequestMapping("/experiencialaboral")
-@CrossOrigin(origins = "http://localhost:4200/")
+@CrossOrigin(origins = "https://arg-programa-backend.web.app/")
 public class CExperiencia {
     @Autowired
     SExperiencia sExperiencia;

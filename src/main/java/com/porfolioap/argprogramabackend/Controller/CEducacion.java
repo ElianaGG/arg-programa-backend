@@ -26,7 +26,7 @@ import com.porfolioap.argprogramabackend.Service.SEducacion;
 
 @RestController
 @RequestMapping("/educacion")
-@CrossOrigin(origins = "http://localhost:4200/")
+@CrossOrigin(origins = "https://arg-programa-backend.web.app/")
 public class CEducacion {
     @Autowired
     SEducacion sEducacion;

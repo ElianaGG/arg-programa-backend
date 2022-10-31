@@ -23,7 +23,7 @@ import com.porfolioap.argprogramabackend.Security.Controller.Mensaje;
 import com.porfolioap.argprogramabackend.Service.ImpPersonaService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200/")
+@CrossOrigin(origins = "https://arg-programa-backend.web.app/")
 @RequestMapping("/personas")
 public class PersonaController {
     @Autowired
