@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = "https://arg-programa-backend.web.app/")
+@CrossOrigin
 @RequestMapping("/ping")
 public class Ping {
     

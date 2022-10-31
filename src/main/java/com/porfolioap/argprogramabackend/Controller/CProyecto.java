@@ -26,7 +26,7 @@ import com.porfolioap.argprogramabackend.Service.SProyecto;
 
 @RestController
 @RequestMapping("/proyecto")
-@CrossOrigin(origins = "https://arg-programa-backend.web.app/")
+@CrossOrigin
 public class CProyecto {
     @Autowired
     SProyecto sProyecto;
