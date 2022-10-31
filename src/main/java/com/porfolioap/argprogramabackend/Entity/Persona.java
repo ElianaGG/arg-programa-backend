@@ -28,18 +28,18 @@ public class Persona {
     private String apellido;
 
     @NotNull
-    private String description;
+    private String descripcion;
 
     private String img;
 
-    //Constructores
+    // Constructores
     public Persona() {
-    } 
+    }
 
-    public  Persona(String nombre, String apellido, String description, String img) {
+    public Persona(String nombre, String apellido, String descripcion, String img) {
         this.nombre = nombre;
         this.apellido = apellido;
-        this.description = description;
+        this.descripcion = descripcion;
         this.img = img;
     }
 }

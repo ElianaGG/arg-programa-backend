@@ -25,7 +25,7 @@ import com.porfolioap.argprogramabackend.Service.ImpPersonaService;
 @RestController
 @CrossOrigin(origins = "https://arg-programa-backend.web.app/")
 @RequestMapping("/personas")
-public class PersonaController {
+public class CPersona {
     @Autowired
     ImpPersonaService impPersonaService;
 
@@ -56,13 +56,21 @@ public class PersonaController {
         }
 
         if (StringUtils.isBlank(dtopersona.getNombre())) {
-            return new ResponseEntity<>(new Mensaje("El campo es obligatorio"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new Mensaje("Nombre obligatorio"), HttpStatus.BAD_REQUEST);
+        }
+
+        if (StringUtils.isBlank(dtopersona.getApellido())) {
+            return new ResponseEntity<>(new Mensaje("Apellido obligatorio"), HttpStatus.BAD_REQUEST);
+        }
+
+        if (StringUtils.isBlank(dtopersona.getDescripcion())) {
+            return new ResponseEntity<>(new Mensaje("Descripción obligatorio"), HttpStatus.BAD_REQUEST);
         }
 
         Persona persona = impPersonaService.getOne(id).get();
         persona.setNombre(dtopersona.getNombre());
         persona.setApellido(dtopersona.getApellido());
-        persona.setDescription(dtopersona.getDescription());
+        persona.setDescripcion(dtopersona.getDescripcion());
         persona.setImg(dtopersona.getImg());
 
         impPersonaService.save(persona);

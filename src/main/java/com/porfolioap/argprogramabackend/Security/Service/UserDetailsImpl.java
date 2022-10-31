@@ -10,9 +10,9 @@ import com.porfolioap.argprogramabackend.Security.Entity.Usuario;
 import com.porfolioap.argprogramabackend.Security.Entity.UsuarioPrincipal;
 
 @Service
-public class UserDetailsImpl implements UserDetailsService{
+public class UserDetailsImpl implements UserDetailsService {
     @Autowired
-    UsuarioService  usuarioService;
+    UsuarioService usuarioService;
 
     @Override
     public UserDetails loadUserByUsername(String nombreUsuario) throws UsernameNotFoundException {
@@ -20,5 +20,4 @@ public class UserDetailsImpl implements UserDetailsService{
         return UsuarioPrincipal.build(usuario);
     }
 
-    
 }

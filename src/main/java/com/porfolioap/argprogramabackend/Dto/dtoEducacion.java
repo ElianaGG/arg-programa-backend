@@ -5,22 +5,23 @@ import javax.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter @Setter
+@Getter
+@Setter
 public class dtoEducacion {
     @NotBlank
     private String nombreEdu;
 
-    @NotBlank   
-    private String descriptionEdu;
+    @NotBlank
+    private String descripcionEdu;
 
-    //Constructores
+    // Constructores
 
     public dtoEducacion() {
     }
 
-    public dtoEducacion(@NotBlank String nombreEdu, @NotBlank String descriptionEdu) {
+    public dtoEducacion(@NotBlank String nombreEdu, @NotBlank String descripcionEdu) {
         this.nombreEdu = nombreEdu;
-        this.descriptionEdu = descriptionEdu;
+        this.descripcionEdu = descripcionEdu;
     }
-    
+
 }

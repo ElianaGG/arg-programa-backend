@@ -10,6 +10,7 @@ import com.porfolioap.argprogramabackend.Entity.HyS;
 @Repository
 public interface RHyS extends JpaRepository<HyS, Integer> {
     public Optional<HyS> findByNombre(String nombre);
+
     public boolean existsByNombre(String nombre);
-    
+
 }

@@ -9,6 +9,6 @@ import com.porfolioap.argprogramabackend.Security.Entity.Rol;
 import com.porfolioap.argprogramabackend.Security.Enums.RolNombre;
 
 @Repository
-public interface iRolRepository extends JpaRepository<Rol, Integer>{
+public interface iRolRepository extends JpaRepository<Rol, Integer> {
     Optional<Rol> findByRolNombre(RolNombre rolNombre);
 }

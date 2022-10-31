@@ -17,33 +17,32 @@ public class SHyS {
     @Autowired
     RHyS rhys;
 
-    public List<HyS> list(){
+    public List<HyS> list() {
         return rhys.findAll();
     }
 
-    public Optional<HyS> getOne(int id){
+    public Optional<HyS> getOne(int id) {
         return rhys.findById(id);
     }
 
-    public Optional<HyS> getByNombre(String nombre){
+    public Optional<HyS> getByNombre(String nombre) {
         return rhys.findByNombre(nombre);
     }
 
-    public void save(HyS hys){
+    public void save(HyS hys) {
         rhys.save(hys);
     }
 
-    public void delete(int id){
+    public void delete(int id) {
         rhys.deleteById(id);
     }
 
-    public boolean existsById(int id){
+    public boolean existsById(int id) {
         return rhys.existsById(id);
     }
 
-    public boolean existsByNombre(String nombre){
+    public boolean existsByNombre(String nombre) {
         return rhys.existsByNombre(nombre);
     }
 
-    
 }

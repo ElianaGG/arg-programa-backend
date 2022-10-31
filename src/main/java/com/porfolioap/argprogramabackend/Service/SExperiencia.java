@@ -17,31 +17,31 @@ public class SExperiencia {
     @Autowired
     RExperiencia rExperiencia;
 
-    public List<Experiencia> list(){
+    public List<Experiencia> list() {
         return rExperiencia.findAll();
     }
 
-    public Optional<Experiencia> getOne(int id){
+    public Optional<Experiencia> getOne(int id) {
         return rExperiencia.findById(id);
     }
-    
-    public Optional<Experiencia> getByNombreExp(String nombreExp){
+
+    public Optional<Experiencia> getByNombreExp(String nombreExp) {
         return rExperiencia.findByNombreExp(nombreExp);
     }
 
-    public void save(Experiencia experiencia){
+    public void save(Experiencia experiencia) {
         rExperiencia.save(experiencia);
     }
 
-    public void delete(int id){
+    public void delete(int id) {
         rExperiencia.deleteById(id);
     }
 
-    public boolean existsById(int id){
+    public boolean existsById(int id) {
         return rExperiencia.existsById(id);
     }
 
-    public boolean existsByNombreExp(String nombreExp){
+    public boolean existsByNombreExp(String nombreExp) {
         return rExperiencia.existsByNombreExp(nombreExp);
     }
 }
