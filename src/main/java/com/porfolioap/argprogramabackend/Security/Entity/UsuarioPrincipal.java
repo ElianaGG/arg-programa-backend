@@ -8,14 +8,14 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-public class UsuarioPrincipal implements UserDetails{
+public class UsuarioPrincipal implements UserDetails {
     private String nombre;
     private String nombreUsuario;
     private String email;
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
-   
-    //Constructores
+
+    // Constructores
     public UsuarioPrincipal(String nombre, String nombreUsuario, String email, String password,
             Collection<? extends GrantedAuthority> authorities) {
         this.nombre = nombre;
@@ -25,12 +25,14 @@ public class UsuarioPrincipal implements UserDetails{
         this.authorities = authorities;
     }
 
-    public static UsuarioPrincipal buid(Usuario usuario){
-        List<GrantedAuthority> authorities = usuario.getRoles().stream().map(rol -> new SimpleGrantedAuthority(rol.getRolNombre().name())).collect(Collectors.toList());   
-        return new UsuarioPrincipal(usuario.getNombre(), usuario.getNombreUsuario(), usuario.getEmail(), usuario.getPassword(), authorities);
+    public static UsuarioPrincipal build(Usuario usuario) {
+        List<GrantedAuthority> authorities = usuario.getRoles().stream()
+                .map(rol -> new SimpleGrantedAuthority(rol.getRolNombre().name())).collect(Collectors.toList());
+        return new UsuarioPrincipal(usuario.getNombre(), usuario.getNombreUsuario(), usuario.getEmail(),
+                usuario.getPassword(), authorities);
     }
 
-    //Metodos
+    // Metodos
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
@@ -73,6 +75,5 @@ public class UsuarioPrincipal implements UserDetails{
     public boolean isEnabled() {
         return true;
     }
-    
-    
+
 }
