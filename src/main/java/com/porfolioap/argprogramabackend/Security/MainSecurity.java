@@ -29,32 +29,32 @@ public class MainSecurity {
     JwtEntryPoint jwtEntryPoint;
 
     @Bean
-    public JwtTokenFilter jwtTokenFilter(){
+    public JwtTokenFilter jwtTokenFilter() {
         return new JwtTokenFilter();
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) 
-    throws Exception{
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+            throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http)
-    throws Exception{
+            throws Exception {
         http.cors().and().csrf().disable()
-        .authorizeRequests()
-        .antMatchers("/**").permitAll()
-        .anyRequest().authenticated()
-        .and()
-        .exceptionHandling().authenticationEntryPoint(jwtEntryPoint)
-        .and()
-        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .authorizeRequests()
+                .antMatchers("/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .exceptionHandling().authenticationEntryPoint(jwtEntryPoint)
+                .and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }

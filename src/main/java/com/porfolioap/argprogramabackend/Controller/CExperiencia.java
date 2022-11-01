@@ -27,7 +27,7 @@ import com.porfolioap.argprogramabackend.Service.SExperiencia;
 
 @RestController
 @RequestMapping("/experiencialaboral")
-@CrossOrigin(origins = "http://localhost:4200/")
+@CrossOrigin
 public class CExperiencia {
     @Autowired
     SExperiencia sExperiencia;
@@ -52,12 +52,16 @@ public class CExperiencia {
         if(StringUtils.isBlank(dtoexp.getNombreExp())){
             return new ResponseEntity<>(new Mensaje("El nombre es obligatorio"), HttpStatus.BAD_REQUEST);
         }
+
+        if(StringUtils.isBlank(dtoexp.getDescripcionExp())){
+            return new ResponseEntity<>(new Mensaje("Descripción obligatoria"), HttpStatus.BAD_REQUEST);
+        }
           
         if(sExperiencia.existsByNombreExp(dtoexp.getNombreExp())){
             return new ResponseEntity<>(new Mensaje("Esa experiencia existe"), HttpStatus.BAD_REQUEST);
         }
         
-        Experiencia experiencia  = new Experiencia(dtoexp.getNombreExp(), dtoexp.getDescriptionExp());
+        Experiencia experiencia  = new Experiencia(dtoexp.getNombreExp(), dtoexp.getDescripcionExp());
      
         sExperiencia.save(experiencia);
 
@@ -70,7 +74,7 @@ public class CExperiencia {
             return new ResponseEntity<>(new Mensaje("El ID no existe"), HttpStatus.BAD_REQUEST);
         }
         sExperiencia.delete(id);
-            return new ResponseEntity<>(new Mensaje("Experiencia elimanada"), HttpStatus.OK);
+            return new ResponseEntity<>(new Mensaje("Experiencia eliminada"), HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
@@ -87,10 +91,14 @@ public class CExperiencia {
         if(StringUtils.isBlank(dtoexp.getNombreExp())){
             return new ResponseEntity<>(new Mensaje("El nombre es obligatorio"), HttpStatus.BAD_REQUEST);
         }
+
+        if(StringUtils.isBlank(dtoexp.getDescripcionExp())){
+            return new ResponseEntity<>(new Mensaje("El nombre es obligatorio"), HttpStatus.BAD_REQUEST);
+        }
             
             Experiencia experiencia = sExperiencia.getOne(id).get();
             experiencia.setNombreExp(dtoexp.getNombreExp());
-            experiencia.setDescriptionExp(dtoexp.getDescriptionExp());
+            experiencia.setDescripcionExp(dtoexp.getDescripcionExp());
 
             sExperiencia.save(experiencia);
                 return new ResponseEntity<>(new Mensaje("Experiencia actualizada"), HttpStatus.OK);

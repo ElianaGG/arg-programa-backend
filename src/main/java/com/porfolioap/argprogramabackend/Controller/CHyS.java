@@ -26,7 +26,7 @@ import com.porfolioap.argprogramabackend.Service.SHyS;
 
 @RestController
 @RequestMapping("/skill")
-@CrossOrigin(origins = "http://localhost:4200/")
+@CrossOrigin
 public class CHyS {
     @Autowired
     SHyS shys;

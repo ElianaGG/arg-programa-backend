@@ -17,32 +17,32 @@ public class SEducacion {
     @Autowired
     REducacion rEducacion;
 
-    public List<Educacion> list(){
+    public List<Educacion> list() {
         return rEducacion.findAll();
     }
 
-    public Optional<Educacion> getOne(int id){
+    public Optional<Educacion> getOne(int id) {
         return rEducacion.findById(id);
     }
-    
-    public Optional<Educacion> getByNombreEdu(String nombreEdu){
+
+    public Optional<Educacion> getByNombreEdu(String nombreEdu) {
         return rEducacion.findByNombreEdu(nombreEdu);
     }
 
-    public void save(Educacion educacion){
+    public void save(Educacion educacion) {
         rEducacion.save(educacion);
     }
 
-    public void delete(int id){
+    public void delete(int id) {
         rEducacion.deleteById(id);
     }
 
-    public boolean existsById(int id){
+    public boolean existsById(int id) {
         return rEducacion.existsById(id);
     }
 
-    public boolean existsByNombreEdu(String nombreEdu){
+    public boolean existsByNombreEdu(String nombreEdu) {
         return rEducacion.existsByNombreEdu(nombreEdu);
     }
-    
+
 }

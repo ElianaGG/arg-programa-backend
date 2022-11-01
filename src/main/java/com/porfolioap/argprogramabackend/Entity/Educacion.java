@@ -8,22 +8,23 @@ import javax.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter @Setter
+@Getter
+@Setter
 @Entity
 public class Educacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nombreEdu;
-    private String descriptionEdu;
+    private String descripcionEdu;
 
-    //Constructores
+    // Constructores
     public Educacion() {
-    } 
+    }
 
-    public Educacion(String nombreEdu, String descriptionEdu) {
+    public Educacion(String nombreEdu, String descripcionEdu) {
         this.nombreEdu = nombreEdu;
-        this.descriptionEdu = descriptionEdu;
+        this.descripcionEdu = descripcionEdu;
     }
 
 }

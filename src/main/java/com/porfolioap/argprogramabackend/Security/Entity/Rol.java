@@ -1,6 +1,10 @@
 package com.porfolioap.argprogramabackend.Security.Entity;
 
 import com.porfolioap.argprogramabackend.Security.Enums.RolNombre;
+
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -9,7 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
-
+@Getter
+@Setter
 @Entity
 public class Rol {
     @Id
@@ -20,28 +25,11 @@ public class Rol {
     @Enumerated(EnumType.STRING)
     private RolNombre rolNombre;
 
-//Constructor
-public Rol(){
-}
+    // Constructor
+    public Rol() {
+    }
 
-public Rol(RolNombre rolNombre){
-    this.rolNombre = rolNombre;
-}
-
-//Getter & Setter
-public int getId() {
-    return id;
-}
-
-public void setId(int id) {
-    this.id = id;
-}
-
-public RolNombre getRolNombre() {
-    return rolNombre;
-}
-
-public void setRolNombre(RolNombre rolNombre) {
-    this.rolNombre = rolNombre;
-}
+    public Rol(RolNombre rolNombre) {
+        this.rolNombre = rolNombre;
+    }
 }

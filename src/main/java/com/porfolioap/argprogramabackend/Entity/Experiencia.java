@@ -8,21 +8,22 @@ import javax.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter @Setter
+@Getter
+@Setter
 @Entity
 public class Experiencia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nombreExp;
-    private String descriptionExp;
+    private String descripcionExp;
 
-    //Constructores
+    // Constructores
     public Experiencia() {
-    } 
+    }
 
-    public Experiencia(String nombreExp, String descriptionExp) {
+    public Experiencia(String nombreExp, String descripcionExp) {
         this.nombreExp = nombreExp;
-        this.descriptionExp = descriptionExp;
+        this.descripcionExp = descripcionExp;
     }
 }

@@ -11,20 +11,20 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class HyS {
+public class Proyecto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private int id;
-    private String nombre;
-    private int porcentaje;
+    private String nombreP;
+    private String descripcionP;
 
     // Constructores
-    public HyS() {
+    public Proyecto() {
     }
 
-    public HyS(String nombre, int porcentaje) {
-        this.nombre = nombre;
-        this.porcentaje = porcentaje;
+    public Proyecto(String nombreP, String descripcionP) {
+        this.nombreP = nombreP;
+        this.descripcionP = descripcionP;
     }
+
 }

@@ -52,21 +52,22 @@ public class AuthController {
 
     @PostMapping("/nuevo")
     public ResponseEntity<?> nuevo(@Valid @RequestBody NuevoUsuario nuevoUsuario, BindingResult bindingResult) {
-        if(bindingResult.hasErrors())
+        if (bindingResult.hasErrors())
             return new ResponseEntity<>(new Mensaje("Campos mal puestos o email invalido"), HttpStatus.BAD_REQUEST);
- 
-        if(usuarioService.existsByNombreUsuario(nuevoUsuario.getNombreUsuario()))
+
+        if (usuarioService.existsByNombreUsuario(nuevoUsuario.getNombreUsuario()))
             return new ResponseEntity<>(new Mensaje("Este nombre de usuario ya existe"), HttpStatus.BAD_REQUEST);
 
-        if(usuarioService.existsByEmail(nuevoUsuario.getEmail()))
+        if (usuarioService.existsByEmail(nuevoUsuario.getEmail()))
             return new ResponseEntity<>(new Mensaje("Este email ya existe"), HttpStatus.BAD_REQUEST);
-    
-        Usuario usuario = new Usuario(nuevoUsuario.getNombre(), nuevoUsuario.getNombreUsuario(), nuevoUsuario.getEmail(), passwordEncoder.encode(nuevoUsuario.getPassword()));
-    
+
+        Usuario usuario = new Usuario(nuevoUsuario.getNombre(), nuevoUsuario.getNombreUsuario(),
+                nuevoUsuario.getEmail(), passwordEncoder.encode(nuevoUsuario.getPassword()));
+
         Set<Rol> roles = new HashSet<>();
         roles.add(rolService.getByRolNombre(RolNombre.ROLE_USER).get());
-        
-        if(nuevoUsuario.getRoles().contains("admin"))
+
+        if (nuevoUsuario.getRoles().contains("admin"))
             roles.add(rolService.getByRolNombre(RolNombre.ROLE_ADMIN).get());
 
         usuario.setRoles(roles);
@@ -75,13 +76,14 @@ public class AuthController {
         return new ResponseEntity<>(new Mensaje("Usuario guardado"), HttpStatus.CREATED);
     }
 
-   @PostMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginUsuario loginUsuario, BindingResult bindingResult) {
-        if(bindingResult.hasErrors())
-        return new ResponseEntity<>(new Mensaje("Campos mal puestos"), HttpStatus.CREATED);
-        
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUsuario.getNombreUsuario(), loginUsuario.getPassword()));
-    
+        if (bindingResult.hasErrors())
+            return new ResponseEntity<>(new Mensaje("Campos mal puestos"), HttpStatus.CREATED);
+
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginUsuario.getNombreUsuario(), loginUsuario.getPassword()));
+
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String jwt = jwtProvider.generateToken(authentication);
@@ -92,5 +94,5 @@ public class AuthController {
 
         return new ResponseEntity<>(jwtDto, HttpStatus.OK);
     }
-    
+
 }
