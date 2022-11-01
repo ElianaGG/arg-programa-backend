@@ -17,6 +17,7 @@ public class dtoPersona {
     @NotBlank
     private String descripcion;
 
+    @NotBlank
     private String img;
 
     // Constructores
@@ -25,7 +26,7 @@ public class dtoPersona {
     }
 
     public dtoPersona(@NotBlank String nombre, @NotBlank String apellido, @NotBlank String descripcion,
-            String img) {
+    @NotBlank String img) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.descripcion = descripcion;

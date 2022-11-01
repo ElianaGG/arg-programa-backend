@@ -67,6 +67,10 @@ public class CPersona {
             return new ResponseEntity<>(new Mensaje("Descripción obligatorio"), HttpStatus.BAD_REQUEST);
         }
 
+        if (StringUtils.isBlank(dtopersona.getImg())) {
+            return new ResponseEntity<>(new Mensaje("Descripción obligatorio"), HttpStatus.BAD_REQUEST);
+        }
+
         Persona persona = impPersonaService.getOne(id).get();
         persona.setNombre(dtopersona.getNombre());
         persona.setApellido(dtopersona.getApellido());
